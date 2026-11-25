@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0E7C5A">
-<title>Onde jogo isso? · Guia de coleta seletiva do Rio</title>
-<meta name="description" content="Guia interativo de coleta seletiva e economia circular no Rio de Janeiro: as sete lixeiras do padrão CONAMA, busca por item e a jornada do resíduo até virar produto novo.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>♻</text></svg>">
+<meta name="theme-color" content="#003A70">
+<title>Azul ou cinza? · Coleta seletiva na PUC-Rio</title>
+<meta name="description" content="Guia de duas lixeiras da PUC-Rio: o que vai no azul (limpo e seco), o que vai no cinza e o que fica fora das duas lixeiras. Busque o item e veja o destino.">
+<link rel="icon" href="assets/pucrio.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,22 +14,25 @@
   *,*::before,*::after{box-sizing:border-box}
 
   :root{
-    --bg:#FAF7F0;
+    --bg:#FAF8F3;
     --surface:#FFFFFF;
-    --ink:#10241E;
-    --ink-2:#3D524B;
-    --muted:#5C6B65;
-    --line:#E7E3D7;
-    --accent:#0E7C5A;
-    --accent-soft:#E8F4EE;
+    --ink:#101F2E;
+    --ink-2:#3C4C5C;
+    --muted:#5B6A78;
+    --line:#E5E3D9;
+    --accent:#0B4A8F;
+    --accent-soft:#E9F0F9;
+    --amber:#8A5A00;
+    --amber-bg:#FFF6E3;
+    --amber-line:#F2DFB2;
     --ok:#0C6B45;
     --ok-soft:#E6F3EB;
     --no:#A8261C;
     --no-soft:#FBEAE7;
     --r:22px;
     --r-sm:16px;
-    --shadow:0 1px 2px rgba(16,36,30,.05),0 18px 40px -28px rgba(16,36,30,.45);
-    --shadow-lg:0 2px 4px rgba(16,36,30,.05),0 30px 60px -40px rgba(16,36,30,.55);
+    --shadow:0 1px 2px rgba(16,31,46,.05),0 18px 40px -28px rgba(16,31,46,.45);
+    --shadow-lg:0 2px 4px rgba(16,31,46,.05),0 30px 60px -40px rgba(16,31,46,.55);
   }
 
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -37,21 +40,15 @@
   body{
     margin:0;
     font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    background:var(--bg);
-    color:var(--ink);
-    line-height:1.55;
+    background:var(--bg);color:var(--ink);line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
 
   body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
     background:
-      radial-gradient(60vw 55vw at 6% -8%, #E6F3E9 0%, transparent 58%),
-      radial-gradient(48vw 46vw at 100% -2%, #FCEFD9 0%, transparent 55%);
+      radial-gradient(58vw 52vw at 6% -8%, #E8EFF8 0%, transparent 58%),
+      radial-gradient(46vw 44vw at 100% -2%, #FDF3E2 0%, transparent 55%);
   }
 
   .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
@@ -66,24 +63,43 @@
   svg.lucide{width:20px;height:20px;stroke-width:2;flex:none}
 
   /* ---------- Cabeçalho ---------- */
-  .top{padding:44px 0 10px}
+  .top{padding:26px 0 10px}
 
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;
-    font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--accent);background:var(--accent-soft);
-    border:1px solid #CBE5D8;padding:7px 13px;border-radius:999px;
+  .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .brand img{
+    height:40px;width:auto;display:block;background:#fff;
+    border:1px solid var(--line);border-radius:10px;padding:4px 8px;
   }
-  .eyebrow svg.lucide{width:14px;height:14px}
+  .brand span{font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
   h1{
-    margin:0 0 14px;font-weight:800;
-    font-size:clamp(2.05rem,5.2vw,3.5rem);
+    margin:0 0 12px;font-weight:800;
+    font-size:clamp(2.1rem,5.4vw,3.6rem);
     line-height:1.02;letter-spacing:-.035em;
   }
   h1 em{font-style:normal;color:var(--accent)}
 
-  .lede{max-width:62ch;margin:0 0 28px;color:var(--ink-2);font-size:clamp(1rem,1.6vw,1.1rem)}
+  .lede{max-width:60ch;margin:0 0 22px;color:var(--ink-2);font-size:clamp(1rem,1.6vw,1.1rem)}
+
+  /* Regra de ouro */
+  .rule{
+    display:flex;align-items:flex-start;gap:14px;max-width:760px;
+    padding:18px 20px;margin:0 0 26px;
+    background:var(--amber-bg);border:1.5px solid var(--amber-line);
+    border-left:6px solid #E8B23C;border-radius:14px;
+    box-shadow:0 1px 2px rgba(16,31,46,.04);
+  }
+  .rule svg.lucide{width:24px;height:24px;color:var(--amber);margin-top:1px;stroke-width:2.2}
+  .rule p{margin:0;color:#4A3600;font-size:.98rem}
+  .rule strong{display:block;font-size:1.12rem;line-height:1.3;color:#3B2A00;margin-bottom:4px;letter-spacing:-.01em}
+
+  .fora-jump{
+    display:inline-flex;align-items:center;gap:7px;margin:-8px 0 26px;
+    font-size:.9rem;font-weight:700;color:var(--accent);text-decoration:none;
+    border-bottom:2px solid color-mix(in srgb,var(--accent) 30%,#fff);padding-bottom:2px;
+  }
+  .fora-jump svg.lucide{width:16px;height:16px}
+  .fora-jump:hover{color:var(--ink)}
 
   /* ---------- Busca ---------- */
   .search{position:relative;max-width:660px}
@@ -94,24 +110,22 @@
     padding:5px 6px 5px 16px;box-shadow:var(--shadow);
     transition:border-color .18s ease,box-shadow .18s ease;
   }
-  .field:focus-within{
-    border-color:var(--accent);
-    box-shadow:0 0 0 4px rgba(14,124,90,.13),var(--shadow);
-  }
+  .field:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(11,74,143,.12),var(--shadow)}
   .field > svg.lucide{color:var(--muted);flex:none}
 
   .field input{
     flex:1;min-width:0;border:0;outline:0;background:transparent;
     font:inherit;font-size:1rem;color:var(--ink);padding:13px 0;
   }
-  .field input::placeholder{color:#88968F}
+  .field input::placeholder{color:#88959F}
+  .field input::-webkit-search-cancel-button{display:none}
 
   .clear{
     flex:none;border:0;background:transparent;color:var(--muted);
     width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
     cursor:pointer;transition:background .15s ease,color .15s ease;
   }
-  .clear:hover{background:#F2F5F2;color:var(--ink)}
+  .clear:hover{background:#F1F4F2;color:var(--ink)}
   .clear[hidden]{display:none}
 
   #results{
@@ -127,7 +141,7 @@
     border:0;background:transparent;color:inherit;font:inherit;
     padding:10px 12px;border-radius:12px;cursor:pointer;
   }
-  .res:hover,.res[aria-selected="true"]{background:#F4F7F4}
+  .res:hover,.res[aria-selected="true"]{background:#F4F6F8}
   .res-t{font-weight:700;font-size:.97rem;letter-spacing:-.01em}
   .res-b{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:800;color:var(--c)}
   .res-b::before{content:"";width:9px;height:9px;border-radius:3px;background:var(--c)}
@@ -146,39 +160,33 @@
 
   /* ---------- Abas ---------- */
   .tabbar{
-    position:sticky;top:0;z-index:30;margin-top:30px;
-    background:rgba(250,247,240,.88);
+    position:sticky;top:0;z-index:30;margin-top:28px;
+    background:rgba(250,248,243,.9);
     -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
+    padding:10px 0;
   }
-  .tabs{
-    display:flex;gap:8px;overflow-x:auto;padding:8px 0;
-    scrollbar-width:none;-ms-overflow-style:none;
-    scroll-snap-type:x proximity;
-  }
-  .tabs::-webkit-scrollbar{display:none}
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:680px}
 
   .tab{
-    flex:none;scroll-snap-align:center;
-    display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
-    border:1px solid var(--line);background:var(--surface);border-radius:999px;
-    padding:10px 16px;cursor:pointer;font:inherit;font-size:.87rem;font-weight:700;color:var(--ink);
+    display:flex;align-items:center;gap:12px;text-align:left;
+    border:1px solid var(--line);background:var(--surface);border-radius:16px;
+    padding:11px 16px;cursor:pointer;font:inherit;color:var(--ink);
     transition:transform .15s ease,box-shadow .2s ease,background .2s ease,color .2s ease,border-color .2s ease;
   }
-  .tab svg.lucide{width:16px;height:16px;color:var(--c)}
-  .tab:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--c) 45%,#fff)}
-  .tab[aria-selected="true"]{
-    background:var(--c);border-color:var(--c);color:var(--fg);
-    box-shadow:0 12px 22px -14px var(--c);
-  }
-  .tab[aria-selected="true"] svg.lucide{color:var(--fg)}
+  .tab .dot{width:14px;height:14px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 2px #fff}
+  .tab b{display:block;font-size:1rem;line-height:1.2;letter-spacing:-.01em}
+  .tab small{display:block;font-size:.76rem;font-weight:600;color:var(--muted);margin-top:1px}
+  .tab:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--c) 40%,#fff)}
+  .tab[aria-selected="true"]{background:var(--c);border-color:var(--c);color:var(--fg);box-shadow:0 12px 22px -14px var(--c)}
+  .tab[aria-selected="true"] small{color:color-mix(in srgb,var(--fg) 78%,var(--c))}
+  .tab[aria-selected="true"] .dot{background:var(--fg);box-shadow:none}
 
   /* ---------- Painéis ---------- */
-  main{padding:26px 0 44px}
+  main{padding:26px 0 10px}
 
-  .panel{display:grid;gap:18px;animation:rise .38s cubic-bezier(.2,.7,.3,1) both}
+  .panel{display:grid;gap:18px;animation:rise .38s cubic-bezier(.2,.7,.3,1) both;scroll-margin-top:96px}
   .panel[hidden]{display:none}
-  .panel[tabindex]{outline-offset:6px}
 
   @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
@@ -196,23 +204,31 @@
   .kicker::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
 
   .hero h2{margin:0 0 8px;font-size:clamp(1.5rem,3.3vw,2.15rem);line-height:1.1;letter-spacing:-.025em}
-  .hero p{margin:0;color:var(--ink-2);max-width:54ch}
+  .hero p{margin:0;color:var(--ink-2);max-width:56ch}
 
   .art{
-    position:relative;flex:none;width:132px;height:132px;border-radius:28px;
+    position:relative;flex:none;width:128px;height:128px;border-radius:28px;
     display:grid;place-items:center;
-    background:linear-gradient(145deg,#F1F5F1,#fff);
+    background:linear-gradient(145deg,#F1F4F2,#fff);
     background:linear-gradient(145deg,color-mix(in srgb,var(--c) 20%,#fff),color-mix(in srgb,var(--c) 4%,#fff));
     border:1px solid color-mix(in srgb,var(--c) 26%,#fff);
     box-shadow:inset 0 1px 0 #fff;
   }
-  .art::before{
-    content:"";position:absolute;inset:10px;border-radius:20px;
-    border:1px dashed color-mix(in srgb,var(--c) 32%,#fff);
+  .art::before{content:"";position:absolute;inset:10px;border-radius:20px;border:1px dashed color-mix(in srgb,var(--c) 32%,#fff)}
+  .art svg.lucide{position:relative;width:54px;height:54px;color:var(--c);stroke-width:1.5}
+
+  /* Aviso de preparo dentro do painel */
+  .alert{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:16px 18px;border-radius:var(--r-sm);
+    background:var(--amber-bg);border:1px solid var(--amber-line);
   }
-  .art svg.lucide{position:relative;width:56px;height:56px;color:var(--c);stroke-width:1.5}
+  .alert svg.lucide{color:var(--amber);margin-top:2px}
+  .alert p{margin:0;font-size:.95rem;color:#4A3600}
+  .alert strong{color:#3B2A00;font-weight:800}
 
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .mats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 
   .card{
     background:var(--surface);border:1px solid var(--line);
@@ -222,9 +238,12 @@
     display:flex;align-items:center;gap:9px;margin:0 0 12px;
     font-size:.9rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
   }
-  .card.pode h3{color:var(--ok)}
+  .card h3 svg.lucide{width:17px;height:17px;color:var(--c)}
+  .card.pode h3,.card.mat h3{color:var(--t)}
   .card.nao h3{color:var(--no)}
   .card ul{list-style:none;margin:0;padding:0}
+  .card.nao-wide ul{columns:2;column-gap:28px}
+  .card.nao-wide li{break-inside:avoid}
   .card li{
     display:flex;align-items:flex-start;gap:10px;
     padding:8px 0;font-size:.94rem;color:var(--ink-2);
@@ -238,14 +257,18 @@
     color:var(--ink);transition:background .3s ease;
   }
 
+  .card-link{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+  .card-link a{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;font-weight:800;color:var(--accent);text-decoration:none}
+  .card-link a svg.lucide{width:15px;height:15px}
+  .card-link a:hover{text-decoration:underline}
+
   .mk{
     flex:none;width:19px;height:19px;border-radius:50%;
     display:grid;place-items:center;margin-top:2px;
     font-size:11px;font-weight:900;line-height:1;
   }
-  .pode .mk{background:var(--ok-soft);color:var(--ok)}
+  .pode .mk,.mat .mk{background:color-mix(in srgb,var(--c) 13%,#fff);color:var(--t)}
   .nao .mk{background:var(--no-soft);color:var(--no)}
-  .card h3 .mk{width:22px;height:22px;font-size:12px;margin-top:0}
 
   .tip{
     display:flex;align-items:flex-start;gap:14px;
@@ -307,16 +330,54 @@
   .plinks a{font-size:.88rem;font-weight:700;color:var(--t);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px}
   .plinks a:hover{color:var(--ink)}
 
+  /* ---------- Fora das duas lixeiras ---------- */
+  #fora{padding-top:34px;scroll-margin-top:96px}
+  .fora-head{max-width:70ch;margin-bottom:18px}
+  .fora-head h2{margin:0 0 6px;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.025em}
+  .fora-head p{margin:0;color:var(--muted);font-size:.95rem}
+
+  .fora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .fora-card{
+    position:relative;display:flex;flex-direction:column;gap:10px;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);
+    padding:20px;box-shadow:var(--shadow);
+    transition:box-shadow .25s ease,border-color .25s ease;
+  }
+  .fora-card .fc-ic{
+    width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+    background:#F2F5F7;border:1px solid var(--line);color:#3C4C5C;
+  }
+  .fora-card .fc-ic svg.lucide{width:21px;height:21px}
+  .fora-card h3{margin:0;font-size:1.02rem;letter-spacing:-.01em}
+  .fora-card .dest{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .fora-card p{margin:0;font-size:.9rem;color:var(--ink-2);flex:1}
+  .fora-card a{
+    display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+    font-size:.85rem;font-weight:800;color:var(--accent);text-decoration:none;
+  }
+  .fora-card a svg.lucide{width:15px;height:15px}
+  .fora-card a:hover{text-decoration:underline}
+  .fora-card.flash{border-color:#C9A24A;box-shadow:0 0 0 3px #F7E7BF,var(--shadow)}
+
+  .fora-note{
+    display:flex;align-items:flex-start;gap:12px;margin-top:16px;
+    padding:14px 16px;border-radius:14px;
+    background:#F5F7F4;border:1px dashed #CDD6CE;color:var(--ink-2);font-size:.9rem;
+  }
+  .fora-note svg.lucide{color:#4C6B4F;margin-top:1px;width:18px;height:18px}
+  .fora-note a{color:var(--ok);font-weight:800;text-decoration:underline;text-underline-offset:2px}
+
   /* ---------- Rodapé ---------- */
-  .foot{margin-top:12px;padding:26px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+  .foot{margin-top:38px;padding:26px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
   .foot .wrap{display:grid;gap:10px}
-  .foot p{margin:0;max-width:80ch}
+  .foot p{margin:0;max-width:82ch}
   .foot strong{color:var(--ink-2)}
   .foot a{color:var(--ink-2);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 
   /* ---------- Responsivo ---------- */
   @media (max-width:820px){
     .cols{grid-template-columns:1fr}
+    .card.nao-wide ul{columns:1}
     .hero{grid-template-columns:1fr;gap:18px;padding:22px}
     .art{width:92px;height:92px;border-radius:20px;justify-self:start;order:-1}
     .art::before{inset:7px;border-radius:14px}
@@ -325,12 +386,17 @@
 
   @media (max-width:560px){
     .wrap{padding:0 16px}
-    .top{padding:30px 0 6px}
+    .top{padding:20px 0 6px}
+    .brand img{height:34px}
+    .rule{padding:15px 16px;gap:11px}
+    .rule strong{font-size:1.02rem}
     .hero{padding:20px 18px}
-    .card{padding:16px 16px}
+    .card{padding:16px}
     .story{padding:20px 18px}
-    .tip{padding:14px}
-    .tab{font-size:.81rem;padding:9px 13px}
+    .tip,.alert{padding:14px}
+    .tab{padding:10px 12px;gap:9px}
+    .tab b{font-size:.92rem}
+    .tab small{font-size:.7rem}
     .partner{flex-direction:column;align-items:flex-start}
     .btn{width:100%;justify-content:center}
     .steps li{padding-left:42px}
@@ -351,15 +417,29 @@
 
 <header class="top">
   <div class="wrap">
-    <p class="eyebrow"><i data-lucide="recycle" aria-hidden="true"></i> Rio de Janeiro · Economia circular</p>
-    <h1>Onde jogo <em>isso</em>?</h1>
-    <p class="lede">Sete lixeiras, um guia só. Descubra em segundos onde cada resíduo deve ir &mdash; e o que acontece com ele depois que sai da sua porta.</p>
+    <div class="brand">
+      <img src="assets/pucrio.png" alt="PUC-Rio" width="135" height="74">
+      <span>Coleta seletiva no campus</span>
+    </div>
+
+    <h1>Azul ou <em>cinza</em>?</h1>
+    <p class="lede">Duas lixeiras, uma decisão. Digite o item e o guia responde na hora — e mostra o que acontece com ele depois que sai da sua mão.</p>
+
+    <div class="rule" role="note">
+      <i data-lucide="sparkles" aria-hidden="true"></i>
+      <p>
+        <strong>Limpo e seco? Azul. Sujo, molhado ou na dúvida? Cinza.</strong>
+        Um pote com resto de comida contamina o fardo inteiro: o material deixa de ser reciclável e vira rejeito.
+      </p>
+    </div>
+
+    <a class="fora-jump" href="#fora">Vidro, pilha e óleo: veja o que fica fora das duas lixeiras <i data-lucide="arrow-down" aria-hidden="true"></i></a>
 
     <div class="search" role="search">
-      <label class="sr-only" for="q">Buscar um item para saber a lixeira correta</label>
+      <label class="sr-only" for="q">Buscar um item para saber em qual lixeira ele vai</label>
       <div class="field">
         <i data-lucide="search" aria-hidden="true"></i>
-        <input id="q" type="search" placeholder="Onde jogo isso? Ex.: pilha, caixa de pizza, borra de café"
+        <input id="q" type="search" placeholder="Onde jogo isso? Ex.: caixa de pizza, tampinha, pilha"
                autocomplete="off" role="combobox" aria-expanded="false" aria-controls="results"
                aria-autocomplete="list" aria-describedby="dica-busca" enterkeyhint="search">
         <button class="clear" type="button" id="clear" aria-label="Limpar busca" hidden>
@@ -369,31 +449,43 @@
       <ul id="results" role="listbox" aria-label="Resultados da busca" hidden></ul>
       <div class="chips" id="chips">
         <span id="dica-busca">Tente:</span>
-        <button class="chip" type="button">pilha</button>
         <button class="chip" type="button">caixa de pizza</button>
-        <button class="chip" type="button">borra de café</button>
-        <button class="chip" type="button">espelho</button>
         <button class="chip" type="button">tampinha</button>
+        <button class="chip" type="button">borra de café</button>
+        <button class="chip" type="button">pilha</button>
+        <button class="chip" type="button">vidro</button>
+        <button class="chip" type="button">guardanapo</button>
         <button class="chip" type="button">óleo de cozinha</button>
-        <button class="chip" type="button">isopor</button>
       </div>
       <p id="sr" class="sr-only" role="status" aria-live="polite"></p>
     </div>
   </div>
 </header>
 
-<nav class="tabbar" aria-label="Categorias de coleta seletiva">
-  <div class="wrap"><div class="tabs" id="tabs" role="tablist" aria-label="Categorias"></div></div>
+<nav class="tabbar" aria-label="Lixeiras do campus">
+  <div class="wrap"><div class="tabs" id="tabs" role="tablist" aria-label="Lixeiras"></div></div>
 </nav>
 
 <main id="conteudo">
   <div class="wrap" id="panels"></div>
+
+  <div class="wrap" id="fora">
+    <div class="fora-head">
+      <h2>Fora das duas lixeiras</h2>
+      <p>Estes resíduos não vão no azul nem no cinza: cada um tem um ponto de entrega próprio.</p>
+    </div>
+    <div class="fora-grid" id="fora-grid"></div>
+    <div class="fora-note">
+      <i data-lucide="leaf" aria-hidden="true"></i>
+      <p><strong>E o resto de merenda?</strong> Hoje vai na lixeira cinza. Separar o orgânico para compostagem é o próximo passo possível para o campus — a <a href="https://www.compostae.com.br/" target="_blank" rel="noopener noreferrer">Compostaê</a> faz coleta domiciliar de orgânicos no Rio e devolve composto e recompensas.</p>
+    </div>
+  </div>
 </main>
 
 <footer class="foot">
   <div class="wrap">
-    <p><strong>Guia educativo.</strong> Cores conforme a Resolução CONAMA 275/2001. A coleta porta a porta varia por bairro no Rio &mdash; confirme no site da <a href="https://www.rio.rj.gov.br/web/comlurb" target="_blank" rel="noopener noreferrer">COMLURB</a> ou no ponto de entrega voluntária mais próximo.</p>
-    <p>Iniciativas citadas: Compostaê, Rio Eco Pets, Coopama e Green Eletron. Conteúdo informativo, sem vínculo oficial com as entidades.</p>
+    <p><strong>Guia educativo da campanha de coleta seletiva da PUC-Rio.</strong> As duas lixeiras seguem a rotina do campus; as cores de referência vêm da Resolução CONAMA 275/2001. Em caso de dúvida sobre um ponto de entrega, procure a equipe de resíduos da unidade ou consulte a <a href="https://www.rio.rj.gov.br/web/comlurb" target="_blank" rel="noopener noreferrer">COMLURB</a>.</p>
+    <p>Iniciativas citadas: Coopama, Rio Eco Pets, Compostaê e Green Eletron. Conteúdo informativo, sem vínculo oficial com as entidades.</p>
   </div>
 </footer>
 
@@ -402,249 +494,98 @@
 (function () {
   'use strict';
 
-  const CATS = [
+  /* ---------------- Dados: as duas lixeiras ---------------- */
+  const BINS = [
     {
-      id: 'papel', nome: 'Papel e Papelão', lixeira: 'azul', icone: 'newspaper',
-      cor: '#0A5CA8', tinta: '#0A5CA8', fg: '#FFFFFF',
-      resumo: 'Papel limpo e seco volta a ser papel. Gordura, umidade e plastificação derrubam o valor do fardo inteiro.',
-      termos: ['papel', 'papelão', 'papelao', 'papelão', 'revista', 'jornal', 'longa vida'],
-      pode: [
-        'Jornais, revistas e folhetos de supermercado',
-        'Caixas de papelão desmontadas e amassadas',
-        'Papel de escritório, cadernos e apostilas',
-        'Envelopes sem janela de plástico',
-        'Caixinha longa vida (leite, suco) lavada e seca',
-        'Sacos de papel, caixas de cereal e de ovo',
-        'Tampa limpa da caixa de pizza'
+      id: 'azul', curto: 'Azul', sub: 'Papel, plástico e metal limpos',
+      nome: 'Recicláveis secos', lixeira: 'azul', icone: 'recycle',
+      cor: '#0B4A8F', tinta: '#0B4A8F', fg: '#FFFFFF',
+      resumo: 'Papel, papelão, plástico e metal — desde que estejam limpos e secos. Latinha, garrafa PET, caixinha de leite e tampinha entram aqui e voltam como produto novo.',
+      alerta: 'Antes de jogar: sem resto de comida e sem líquido. Escorra, enxágue rápido e deixe secar.',
+      grupos: [
+        {
+          nome: 'Papel', icone: 'newspaper',
+          itens: [
+            'Caixa de papelão desmontada',
+            'Jornal, revista e folheto',
+            'Papel de escritório, caderno e apostila',
+            'Caixinha de leite e suco, lavada e seca',
+            'Tampa limpa da caixa de pizza'
+          ]
+        },
+        {
+          nome: 'Plástico', icone: 'cup-soda',
+          itens: [
+            'Garrafa PET amassada e vazia',
+            'Pote de margarina, iogurte e sorvete, lavado',
+            'Embalagem de shampoo e de limpeza',
+            'Sacola e saco plástico limpos',
+            'Tampinha de garrafa (também pode ser doada)'
+          ]
+        },
+        {
+          nome: 'Metal', icone: 'wrench',
+          itens: [
+            'Latinha de alumínio',
+            'Lata de aço: milho, sardinha, leite em pó',
+            'Tampa e anel de metal de garrafa',
+            'Lacre de alumínio de garrafa',
+            'Papel-alumínio limpo'
+          ]
+        }
       ],
       nao: [
-        'Papel higiênico, guardanapo e papel-toalha usados',
-        'Caixa de pizza engordurada, com queijo ou molho',
-        'Papel plastificado, fotográfico ou carbono',
-        'Papel molhado, mofado ou com resto de comida',
-        'Bitucas de cigarro e embalagem com fita adesiva'
+        'Qualquer embalagem com resto de comida',
+        'Caixa de pizza engordurada e guardanapo usado',
+        'Vidro, espelho, louça e pirex (fora das duas lixeiras)',
+        'Pilha, bateria, lâmpada e remédio (fora das duas lixeiras)',
+        'Isopor sujo e embalagem metalizada',
+        'Fralda, máscara, papel higiênico e esponja'
       ],
-      dica: 'Desmonte as caixas e mantenha o material seco: papel amassado ocupa menos espaço no caminhão e vale mais na cooperativa. Na caixa de pizza, a tampa limpa vai no azul e o fundo engordurado, no cinza.',
-      jornada: 'Do fardo prensado à bobina nova: o papel tem um dos ciclos mais rápidos da reciclagem.',
+      dica: 'Não precisa ficar brilhando: precisa não ter comida. Escorra o líquido, enxágue rápido e seque. Amasse garrafas e latinhas — cabe mais no contêiner e o fardo vale mais na cooperativa.',
+      jornada: 'Do contêiner do campus ao fardo da cooperativa: o azul só vira renda se chegar limpo.',
       passos: [
-        { t: 'Coleta', d: 'O caminhão da COMLURB e os catadores autônomos recolhem o azul. Boa parte do material do Rio chega às cooperativas por carrinho e carroça.' },
-        { t: 'Triagem e enfardamento', d: 'Na Coopama, em Maria da Graça, os cooperados separam por tipo de fibra — papel branco, papelão, jornal — e prensam tudo em fardos amarrados.' },
-        { t: 'Indústria papeleira', d: 'A fábrica desagrega o papel em água, retira tinta e contaminantes e forma bobinas de papel reciclado.' },
-        { t: 'Novo produto', d: 'Caixa, caderno ou embalagem nova. Cada tonelada reciclada evita o corte de árvores e economiza água e energia.' }
+        { t: 'Lixeira azul no campus', d: 'Você separa no dia a dia. O conteúdo vai para o contêiner interno da unidade, e não se mistura ao lixo comum.' },
+        { t: 'Rota da triagem', d: 'O material segue para galpões de triagem, onde os sacos são abertos, pesados e conferidos. Item sujo é retirado ali — e vira rejeito.' },
+        { t: 'Triagem e enfardamento na Coopama', d: 'Em Maria da Graça, Zona Norte do Rio, os cooperados separam por tipo (papel, PET, filme, metal) e prensam em fardos. É o trabalho que transforma saco misturado em lote vendável.' },
+        { t: 'Indústria e volta ao mercado', d: 'O fardo vira matéria-prima de papel, resina ou metal. O que era resíduo do campus volta como caixa, garrafa, tecido ou peça nova — e a triagem vira renda para quem separa.' }
       ],
       parceiro: {
         nome: 'Coopama', url: 'https://coopamarecicla.com.br/', cta: 'Conhecer a Coopama',
-        txt: 'Cooperativa de catadores em Maria da Graça, Zona Norte do Rio. Recebe o reciclável da vizinhança, faz a triagem e o enfardamento, e mantém o projeto Cooperar para Reciclar, com oficinas de artesanato sustentável e educação ambiental.'
+        txt: 'Cooperativa de catadores em Maria da Graça. Recebe o reciclável da região, faz triagem e enfardamento e mantém o projeto Cooperar para Reciclar, com oficinas de artesanato sustentável e educação ambiental.'
       },
-      extra: []
+      extra: [{ nome: 'Rio Eco Pets — tampinhas e lacres que viram ração', url: 'https://www.rioecopets.com.br/' }]
     },
     {
-      id: 'plastico', nome: 'Plástico', lixeira: 'vermelha', icone: 'cup-soda',
-      cor: '#C62828', tinta: '#C62828', fg: '#FFFFFF',
-      resumo: 'Plástico vale por peso e por tipo. Garrafa e embalagem rígida lavada têm mercado; filme metalizado e isopor sujo, quase nenhum.',
-      termos: ['plástico', 'plastico', 'garrafa pet', 'pet', 'embalagem plástica', 'sacola'],
-      pode: [
-        'Garrafas PET (refrigerante, água) vazias e amassadas',
-        'Potes de margarina, iogurte e sorvete lavados',
-        'Embalagens de shampoo, detergente e limpeza',
-        'Sacolas e sacos plásticos limpos',
-        'Tampinhas de garrafa (separe para doação)',
-        'Copos plásticos rígidos lavados',
-        'Baldes, bacias e brinquedos de plástico quebrados'
-      ],
-      nao: [
-        'Embalagem de salgadinho e biscoito (metalizada)',
-        'Isopor de bandeja de carne e de caixa de eletrônico',
-        'Plástico com resto de comida ou de óleo',
-        'Peças com metal ou cabo misturado',
-        'Fralda, absorvente e lenço umedecido',
-        'Esponja, espuma e palha de aço'
-      ],
-      dica: 'Enxágue rápido e amasse as garrafas. Tampinhas limpas viram renda para proteção animal: guarde num pote e leve a um ponto de coleta do Rio Eco Pets.',
-      jornada: 'Da garrafa amassada ao grão de resina reciclada: o plástico precisa de triagem caprichada para voltar a ter valor.',
-      passos: [
-        { t: 'Coleta', d: 'O vermelho chega às cooperativas pelo caminhão, por catadores e por pontos de entrega voluntária espalhados pela cidade.' },
-        { t: 'Triagem por resina', d: 'Na Coopama, o material é separado por tipo — PET, PEAD, PP — e por cor. O que tem metal ou comida junto é descartado e vira rejeito.' },
-        { t: 'Recicladora', d: 'O plástico é moído em flocos, lavado e fundido em grãos que substituem a resina virgem na indústria.' },
-        { t: 'Novo produto', d: 'Garrafa nova, tubo, fibra de tecido ou mobiliário urbano. O plástico pode ser reciclado várias vezes, perdendo um pouco de qualidade a cada volta.' }
-      ],
-      parceiro: {
-        nome: 'Rio Eco Pets', url: 'https://www.rioecopets.com.br/', cta: 'Ver o Rio Eco Pets',
-        txt: 'Recolhe tampinhas plásticas e lacres de alumínio, vende o material para a reciclagem e destina o dinheiro a ração, castração e tratamento de animais de rua em ONGs e protetores do Rio.'
-      },
-      extra: [{ nome: 'Coopama (triagem e enfardamento)', url: 'https://coopamarecicla.com.br/' }]
-    },
-    {
-      id: 'vidro', nome: 'Vidro', lixeira: 'verde', icone: 'wine',
-      cor: '#157A4B', tinta: '#127042', fg: '#FFFFFF',
-      resumo: 'Vidro se recicla infinitas vezes sem perder qualidade — desde que seja vidro de embalagem. Espelho, pirex e box não entram.',
-      termos: ['vidro', 'garrafa', 'pote de vidro', 'caco'],
-      pode: [
-        'Garrafas de cerveja, vinho e refrigerante',
-        'Potes de conserva, geleia e molho',
-        'Frascos de perfume e cosmético vazios',
-        'Vidros de remédio vazios e sem tampa',
-        'Tampa e anel de metal da garrafa (vão no amarelo)'
-      ],
-      nao: [
-        'Espelho, vidro temperado, pirex e box de banheiro',
-        'Louça, cerâmica, porcelana e vaso sanitário',
-        'Lâmpadas (têm logística reversa própria — laranja)',
-        'Ampolas de remédio e vidro de laboratório',
-        'Cristal, vidro laminado de carro e vidro com película',
-        'Vidro quebrado solto dentro de saco plástico'
-      ],
-      dica: 'Vidro quebrado vai em caixa de papelão reforçada, com a palavra VIDRO escrita por fora: isso protege quem faz a triagem. Tampas e anéis de metal seguem na lixeira amarela.',
-      jornada: 'Do caco limpo ao forno a 1.500 °C: o vidro é o material que se recicla para sempre.',
-      passos: [
-        { t: 'Coleta', d: 'O verde é recolhido junto com os outros recicláveis. Garrafa inteira ajuda: o caco misturado a rejeito perde valor e machuca o cooperado.' },
-        { t: 'Triagem', d: 'Na cooperativa o vidro é separado por cor — incolor, âmbar e verde — e limpo de tampas, rótulos e cerâmica.' },
-        { t: 'Indústria vidreira', d: 'O caco (cullet) é misturado à matéria-prima e fundido. Cada 10% de caco na mistura reduz o consumo de energia do forno.' },
-        { t: 'Nova embalagem', d: 'A garrafa volta ao mercado como garrafa, sem perda de qualidade — o mesmo vidro pode repetir o ciclo indefinidamente.' }
-      ],
-      parceiro: {
-        nome: 'Coopama', url: 'https://coopamarecicla.com.br/', cta: 'Conhecer a Coopama',
-        txt: 'É na cooperativa de Maria da Graça que o vidro do Rio é separado por cor antes de seguir para a indústria. O trabalho dos cooperados é o que transforma caco misturado em lote vendável.'
-      },
-      extra: [{ nome: 'ABIVIDRO — reciclagem do vidro no Brasil', url: 'https://abividro.org.br/' }]
-    },
-    {
-      id: 'metal', nome: 'Metal', lixeira: 'amarela', icone: 'wrench',
-      cor: '#F0B429', tinta: '#8A6100', fg: '#16221C',
-      resumo: 'Alumínio e aço são os materiais de maior valor por quilo na coleta seletiva. Uma lata pode voltar às prateleiras em poucos meses.',
-      termos: ['metal', 'lata', 'latinha', 'alumínio', 'aluminio', 'lacre', 'aço'],
-      pode: [
-        'Latas de alumínio (refrigerante, cerveja, energético)',
-        'Latas de aço: milho, ervilha, sardinha, leite em pó',
-        'Tampas de garrafa e de pote de vidro',
-        'Lacres de alumínio de garrafa (doe ao Rio Eco Pets)',
-        'Panelas, talheres e ferragens velhas',
-        'Papel-alumínio limpo',
-        'Aerossóis vazios, sem furar'
-      ],
-      nao: [
-        'Pilhas e baterias (laranja)',
-        'Latas com tinta, solvente ou óleo',
-        'Embalagem de inseticida e de agrotóxico',
-        'Palha de aço com resto de comida',
-        'Aerossol que ainda tem gás dentro'
-      ],
-      dica: 'Amasse as latas: o caminhão leva mais por viagem e o fardo vale mais. Lacres de alumínio e tampinhas limpas pesam pouco e viram ração e castração no Rio Eco Pets.',
-      jornada: 'Da lata amassada à lata nova: o alumínio é o material que mais rápido volta para a prateleira.',
-      passos: [
-        { t: 'Coleta', d: 'Lata é o que mais aparece no carrinho do catador — e o que mais rápido sai do ponto de coleta.' },
-        { t: 'Separação alumínio e aço', d: 'Na cooperativa, ímãs separam o aço do alumínio. O material é limpo, prensado e vendido por quilo.' },
-        { t: 'Fundição', d: 'A indústria refunde o metal e o transforma em chapas e lingotes. O alumínio reciclado gasta cerca de 95% menos energia que o produzido a partir da bauxita.' },
-        { t: 'Novo produto', d: 'Lata, panela, peça de carro ou esquadria. O ciclo do metal é praticamente infinito.' }
-      ],
-      parceiro: {
-        nome: 'Rio Eco Pets', url: 'https://www.rioecopets.com.br/', cta: 'Ver o Rio Eco Pets',
-        txt: 'Lacre de alumínio e tampinha plástica viram dinheiro para ONGs e protetores de animais do Rio. O projeto mostra que a coleta seletiva também financia cuidado e adoção.'
-      },
-      extra: [{ nome: 'Coopama (triagem e enfardamento)', url: 'https://coopamarecicla.com.br/' }]
-    },
-    {
-      id: 'organico', nome: 'Orgânicos', lixeira: 'marrom', icone: 'leaf',
-      cor: '#6D4A2F', tinta: '#6D4A2F', fg: '#FFFFFF',
-      resumo: 'Metade do lixo de uma casa brasileira é resto de comida. Separado, vira adubo; misturado ao reciclável, contamina o fardo e vira chorume.',
-      termos: ['orgânico', 'organico', 'compostagem', 'resto de comida', 'composto'],
-      pode: [
-        'Cascas, talos, folhas e sobras de frutas e legumes',
-        'Borra e filtro de café, saquinho de chá sem grampo',
-        'Cascas de ovo',
-        'Arroz, feijão e massa que sobraram no prato',
-        'Pão dormido e bolacha molhada',
-        'Poda de jardim, folhas secas e serragem sem tinta',
-        'Guardanapo de papel sujo de comida'
-      ],
-      nao: [
-        'Óleo de cozinha usado (logística específica)',
-        'Carne, peixe e queijo em grande quantidade (exigem bokashi)',
-        'Fezes de animais, areia de gato e tapete higiênico',
-        'Saco “biodegradável” e qualquer plástico',
-        'Cinza de carvão, cigarro e carvão vegetal',
-        'Comida ainda dentro da embalagem'
-      ],
-      dica: 'Escorra o líquido e guarde o baldinho na geladeira ou no congelador até o dia da coleta: sem cheiro, sem mosca. Em apartamento, uma composteira de bancada resolve o volume.',
-      jornada: 'Do balde da cozinha ao saco de composto: o único ciclo em que a natureza faz o trabalho pesado.',
-      passos: [
-        { t: 'Separação em casa', d: 'Você junta os restos em um balde com tampa. Na Compostaê a coleta é domiciliar, em endereços das zonas Norte e Sul e do Centro do Rio.' },
-        { t: 'Coleta e pesagem', d: 'O material é recolhido na porta e pesado: o que você desviou do aterro fica registrado na sua conta.' },
-        { t: 'Compostagem', d: 'Em leiras aeradas, microrganismos transformam os restos em composto em algumas semanas — sem aterro e sem chorume.' },
-        { t: 'Adubo e recompensa', d: 'O composto volta para hortas e parceiros, e o assinante recebe composto e benefícios. O nutriente retorna ao solo da própria cidade.' }
-      ],
-      parceiro: {
-        nome: 'Compostaê', url: 'https://www.compostae.com.br/', cta: 'Visitar a Compostaê',
-        txt: 'Serviço de coleta domiciliar de orgânicos no Rio. Retira os restos nos endereços atendidos, leva para compostagem e devolve composto e recompensas a quem separa — fechando o ciclo dentro da cidade.'
-      },
-      extra: []
-    },
-    {
-      id: 'perigoso', nome: 'Perigosos e Eletrônicos', lixeira: 'laranja', icone: 'battery-warning',
-      cor: '#C2410C', tinta: '#B23C08', fg: '#FFFFFF',
-      resumo: 'Pilha, bateria, lâmpada e remédio nunca vão no lixo comum: têm logística reversa própria e metais que valem a recuperação.',
-      termos: ['pilha', 'bateria', 'lâmpada', 'lampada', 'eletrônico', 'eletronico', 'perigoso', 'remédio', 'remedio'],
-      pode: [
-        'Pilhas comuns (AA, AAA) e alcalinas',
-        'Baterias de celular, notebook e power bank',
-        'Bateria de carro e de moto (na loja ou rede)',
-        'Lâmpadas fluorescentes, LED e de filamento',
-        'Remédios vencidos, com blister e caixa',
-        'Eletrônicos pequenos: fone, carregador, controle',
-        'Cartuchos e toners de impressora',
-        'Óleo de cozinha usado em garrafa PET fechada'
-      ],
-      nao: [
-        'Pilha no lixo comum ou no reciclável',
-        'Bateria de lítio estufada junto de papel',
-        'Lâmpada quebrada misturada ao vidro',
-        'Remédio na pia, no vaso ou no orgânico',
-        'Tinta, solvente e inseticida no ralo',
-        'Abrir ou furar pilhas e baterias'
-      ],
-      dica: 'Passe fita adesiva nos polos das baterias de lítio antes de entregar: elas podem causar incêndio no caminhão. Lâmpada quebrada vai em caixa rígida, nunca solta no saco.',
-      jornada: 'Do ponto de coleta ao metal recuperado: a logística reversa é o que impede o resíduo perigoso de virar contaminação.',
-      passos: [
-        { t: 'Ponto de coleta', d: 'Você entrega em um ponto da rede — mercados, farmácias, bancos, lojas de eletrônicos — cadastrado no sistema de logística reversa.' },
-        { t: 'Transporte e triagem', d: 'A Green Eletron e as entidades gestoras recolhem por tipo: pilhas, baterias, lâmpadas e eletrônicos seguem rotas e destinos diferentes.' },
-        { t: 'Recuperação de metais', d: 'Pilhas são trituradas e separadas em frações. Aço, zinco e manganês — e, nas de lítio, cobalto e níquel — voltam como matéria-prima.' },
-        { t: 'Destinação segura', d: 'O que não tem recuperação é estabilizado e destinado a local licenciado. Nada disso chega ao solo ou ao lençol freático.' }
-      ],
-      parceiro: {
-        nome: 'Green Eletron', url: 'https://greeneletron.org.br/', cta: 'Pontos da Green Eletron',
-        txt: 'Entidade gestora do sistema de logística reversa de eletroeletrônicos e pilhas no Brasil, com pontos de coleta no Rio. É por essa rede que a pilha da sua gaveta deixa de ser risco e volta a ser metal.'
-      },
-      extra: []
-    },
-    {
-      id: 'rejeito', nome: 'Rejeitos', lixeira: 'cinza', icone: 'trash-2',
+      id: 'cinza', curto: 'Cinza', sub: 'Na dúvida, sujo e rejeito',
+      nome: 'Rejeito e dúvida', lixeira: 'cinza', icone: 'trash-2',
       cor: '#5A6472', tinta: '#4C5563', fg: '#FFFFFF',
-      resumo: 'Rejeito é o que sobra quando a separação falha. Não tem mercado, ocupa aterro e custa caro à cidade — reduzir é a meta.',
-      termos: ['rejeito', 'lixo comum', 'não reciclável', 'nao reciclavel', 'aterro'],
+      resumo: 'O cinza existe para proteger o azul. Sujo, misturado, molhado ou desconhecido: se não dá para limpar, é aqui. Resto de merenda também.',
+      alerta: 'Sujo ou molhado? Cinza. Mas antes pergunte: dá para enxaguar e secar? Então o destino é o azul.',
       pode: [
-        'Papel higiênico, fralda, absorvente e lenço umedecido',
-        'Máscara descartável, luva e algodão',
-        'Espelho, louça, cerâmica, pirex e vidro temperado',
-        'Esponja, palha de aço engordurada e escova de dente',
-        'Bituca de cigarro, fósforo e carvão',
-        'Caixa de pizza engordurada e embalagem metalizada',
-        'Fita adesiva, lacre plástico e caneta',
-        'Isopor sujo de comida'
+        'Resto de merenda, cascas e borra de café',
+        'Guardanapo, papel-toalha e lenço de papel usados',
+        'Caixa de pizza engordurada',
+        'Embalagem metalizada (salgadinho, biscoito)',
+        'Isopor sujo de comida',
+        'Máscara, luva, fralda e absorvente',
+        'Esponja, palha de aço e escova de dente',
+        'Bituca, caneta e fita adesiva',
+        'Espelho, louça e cerâmica (embalados)'
       ],
       nao: [
-        'Qualquer reciclável limpo — ele tem valor',
-        'Resto de comida (vira composto no marrom)',
-        'Pilha, bateria, lâmpada e remédio (laranja)',
-        'Óleo de cozinha e tinta (logística específica)',
-        'Vidro quebrado solto — embale antes de descartar'
+        'Reciclável limpo: papel, plástico e metal têm valor no azul',
+        'Pilha, lâmpada e remédio (fora das duas lixeiras)',
+        'Vidro (fora das duas lixeiras, sempre embalado)',
+        'Óleo de cozinha (ponto de coleta específico)'
       ],
-      dica: 'Antes de jogar no cinza, pergunte: dá para consertar, doar, reutilizar ou trocar? Cada quilo que não vai para o aterro economiza combustível, espaço e dinheiro público.',
-      jornada: 'Do caminhão ao aterro em Seropédica: o cinza é o fim da linha — e o volume que a cidade precisa reduzir.',
+      dica: 'Teste rápido antes de fechar o saco: está seco? está sem comida? Se a resposta for não, é cinza. Se for vidro, pilha, lâmpada ou óleo, procure o ponto de coleta — nem o cinza é lugar para eles.',
+      jornada: 'Do campus ao aterro em Seropédica: o cinza é o retrato do que não conseguimos desviar.',
       passos: [
-        { t: 'Coleta', d: 'O caminhão de resíduos comuns leva o cinza junto com tudo o que não foi separado na origem.' },
-        { t: 'Estação de transbordo', d: 'Grandes estações recebem o material de várias regiões antes de seguir para a Baixada Fluminense.' },
-        { t: 'Aterro sanitário', d: 'O CTR Rio, em Seropédica, recebe a maior parte do rejeito do município: o lixo é compactado sobre camadas impermeáveis.' },
-        { t: 'Controle ambiental', d: 'O chorume é drenado e tratado e o biogás é queimado ou aproveitado. Ainda assim, o aterro é o fim da linha — não um ciclo.' }
+        { t: 'Lixeira cinza no campus', d: 'Recebe o que sobrou da triagem e o que está sujo demais para virar reciclável. É o saco que mais pesa — e o que mais cresce quando a separação falha.' },
+        { t: 'Contêiner e transbordo', d: 'O material entra na coleta comum do município e passa por uma estação de transbordo antes de seguir para a Baixada.' },
+        { t: 'CTR Rio, em Seropédica', d: 'A maior parte do rejeito do município é compactada sobre camadas impermeáveis, com drenagem de chorume e captação de biogás.' },
+        { t: 'O fim da linha', d: 'Aterro não é ciclo: o resíduo fica ali. Cada quilo desviado para o azul é espaço, combustível e dinheiro público economizados — e uma vaga a menos ocupada no aterro.' }
       ],
       parceiro: {
         nome: 'COMLURB · CTR Rio', url: 'https://www.rio.rj.gov.br/web/comlurb', cta: 'Ver a COMLURB',
@@ -654,110 +595,179 @@
     }
   ];
 
-  /* Itens ambíguos: a resposta certa não é a lixeira óbvia. */
-  const OVERRIDES = [
-    { t: 'caixa de pizza', id: 'rejeito', nota: 'A parte engordurada é rejeito. A tampa limpa pode ir no papel (azul).' },
-    { t: 'espelho', id: 'rejeito', nota: 'Tem película metálica e não funde junto com o vidro de embalagem.' },
-    { t: 'vidro temperado', id: 'rejeito', nota: 'Pirex, box, tampos de mesa e vidro de janela não são vidro de embalagem.' },
-    { t: 'isopor', id: 'rejeito', nota: 'Isopor sujo de comida não tem mercado. Limpo e seco, alguns PEVs aceitam.' },
-    { t: 'lâmpada quebrada', id: 'perigoso', nota: 'Em caixa rígida, com cuidado: fluorescente tem mercúrio e LED tem eletrônica.' },
-    { t: 'remédio vencido', id: 'perigoso', nota: 'Farmácias com programa recolhem. Nunca na pia, no vaso ou no lixo comum.' },
-    { t: 'óleo de cozinha', id: 'perigoso', nota: 'Guarde em garrafa PET fechada e entregue em ponto de coleta. Nunca no ralo.' },
-    { t: 'tampinha', id: 'plastico', nota: 'Guarde limpa e doe ao Rio Eco Pets: a venda financia ONGs de animais.' },
-    { t: 'lacre de alumínio', id: 'metal', nota: 'Vale mais doado ao Rio Eco Pets do que misturado ao fardo.' },
-    { t: 'fralda', id: 'rejeito', nota: 'Fralda descartável não é reciclável nem compostável.' },
-    { t: 'máscara', id: 'rejeito', nota: 'Máscara descartável é rejeito — nunca no reciclável.' },
-    { t: 'borra de café', id: 'organico', nota: 'Vai com o filtro de papel direto para a compostagem.' },
-    { t: 'pilha', id: 'perigoso', nota: 'Metais pesados contaminam solo e água: só em ponto de logística reversa.' },
-    { t: 'bateria de celular', id: 'perigoso', nota: 'Isole os polos com fita e entregue em ponto de coleta de eletrônicos.' }
+  /* ---------------- O que fica fora das duas lixeiras ---------------- */
+  const FORA = [
+    {
+      id: 'perigoso', nome: 'Pilhas, lâmpadas e remédios', nomeCurto: 'ponto de coleta',
+      icone: 'battery-warning', onde: 'Green Eletron · ponto de coleta',
+      txt: 'Pilha, bateria, lâmpada e remédio vencido não vão em nenhuma das duas lixeiras: metais pesados contaminam solo e água. Isole os polos da bateria e leve ao ponto de coleta.',
+      url: 'https://greeneletron.org.br/', cta: 'Achar um ponto',
+      termos: ['pilha', 'bateria', 'lâmpada', 'lampada', 'remédio', 'remedio', 'eletrônico', 'eletronico', 'carregador', 'fone de ouvido']
+    },
+    {
+      id: 'vidro', nome: 'Vidro', nomeCurto: 'ponto de vidro',
+      icone: 'wine', onde: 'Ponto de vidro / PEV',
+      txt: 'Garrafa e pote de vidro são recicláveis, mas exigem separação por cor e cuidado com cacos. Embale em caixa reforçada, escreva VIDRO e leve ao ponto de entrega — nunca solto no saco.',
+      url: 'https://www.rio.rj.gov.br/web/comlurb', cta: 'Ver pontos de entrega',
+      termos: ['vidro', 'garrafa de vidro', 'pote de vidro', 'caco']
+    },
+    {
+      id: 'oleo', nome: 'Óleo de cozinha', nomeCurto: 'ponto de óleo',
+      icone: 'droplet', onde: 'Ponto de coleta de óleo',
+      txt: 'Um litro de óleo no ralo contamina muita água e entope a rede. Guarde em garrafa PET fechada e entregue no ponto de coleta: nem no cinza, nem no azul.',
+      url: 'https://www.compostae.com.br/', cta: 'Ver coleta no Rio',
+      termos: ['óleo', 'oleo', 'óleo usado', 'óleo de cozinha']
+    }
   ];
 
-  const byId = (id) => CATS.filter((c) => c.id === id)[0];
+  /* Itens que confundem na hora: a resposta não é a lixeira óbvia. */
+  const OVERRIDES = [
+    { t: 'caixa de pizza', to: 'cinza', nota: 'A parte engordurada é cinza. A tampa limpa pode ir no azul.' },
+    { t: 'espelho', to: 'cinza', nota: 'Tem película metálica e não é reciclável como vidro.' },
+    { t: 'isopor', to: 'cinza', nota: 'Isopor sujo de comida não tem destino reciclável aqui.' },
+    { t: 'pilha', to: 'fora:perigoso', nota: 'Metais pesados: só em ponto de logística reversa.' },
+    { t: 'lâmpada', to: 'fora:perigoso', nota: 'Fluorescente tem mercúrio; LED tem eletrônica. Em caixa rígida.' },
+    { t: 'remédio vencido', to: 'fora:perigoso', nota: 'Farmácias com programa recolhem. Nunca na pia ou no vaso.' },
+    { t: 'vidro', to: 'fora:vidro', nota: 'Reciclável, mas exige ponto próprio e separação por cor.' },
+    { t: 'óleo de cozinha', to: 'fora:oleo', nota: 'Garrafa PET fechada, ponto de coleta. Nunca no ralo.' },
+    { t: 'tampinha', to: 'azul', nota: 'Limpa, vai no azul. Junte e doe ao Rio Eco Pets.' },
+    { t: 'lacre de alumínio', to: 'azul', nota: 'Pode doar ao Rio Eco Pets em vez de misturar ao fardo.' },
+    { t: 'borra de café', to: 'cinza', nota: 'Vai com o filtro no cinza; separar para compostagem é o próximo passo.' },
+    { t: 'guardanapo', to: 'cinza', nota: 'Sujo de comida não é reciclável.' },
+    { t: 'fralda', to: 'cinza', nota: 'Não é reciclável nem compostável.' },
+    { t: 'máscara', to: 'cinza', nota: 'Máscara descartável é rejeito.' },
+    { t: 'papel higiênico', to: 'cinza', nota: 'Papel higiênico usado é rejeito.' },
+    { t: 'longa vida', to: 'azul', nota: 'Caixinha de leite e suco: lavar, secar e amassar.' },
+    { t: 'cerâmica', to: 'cinza', nota: 'Louça, cerâmica e porcelana não voltam ao forno.' },
+    { t: 'resto de merenda', to: 'cinza', nota: 'Hoje vai na cinza. Compostagem é o próximo passo possível.' }
+  ];
+
+  const byBin = (id) => BINS.filter((b) => b.id === id)[0];
+  const byFora = (id) => FORA.filter((f) => f.id === id)[0];
   const esc = (s) => String(s).replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
   const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
 
-  /* ---------- Índice de busca ---------- */
+  /* ---------------- Índice de busca ---------------- */
   const INDEX = [];
   const seen = {};
-  function addEntry(t, id, nota) {
-    const k = norm(t) + '|' + id;
+  function addEntry(t, to, nota) {
+    const k = norm(t) + '|' + to;
     if (seen[k]) return;
     seen[k] = 1;
-    INDEX.push({ t: t, id: id, nota: nota || '' });
+    INDEX.push({ t: t, to: to, nota: nota || '' });
   }
-  CATS.forEach((c) => {
-    c.termos.forEach((t) => addEntry(t, c.id));
-    c.pode.forEach((t) => addEntry(t, c.id));
-    addEntry(c.nome, c.id);
-  });
-  OVERRIDES.forEach((o) => { delete seen[norm(o.t) + '|' + o.id]; addEntry(o.t, o.id, o.nota); });
+  BINS[0].grupos.forEach((g) => g.itens.forEach((t) => addEntry(t, 'azul')));
+  BINS[1].pode.forEach((t) => addEntry(t, 'cinza'));
+  BINS.forEach((b) => { addEntry(b.nome, b.id); addEntry('lixeira ' + b.lixeira, b.id); });
+  FORA.forEach((f) => f.termos.forEach((t) => addEntry(t, 'fora:' + f.id)));
+  OVERRIDES.forEach((o) => { delete seen[norm(o.t) + '|' + o.to]; addEntry(o.t, o.to, o.nota); });
 
-  /* ---------- Render ---------- */
+  /* ---------------- Cabeçalho de destino na busca ---------------- */
+  function destinoLabel(to) {
+    if (to.indexOf('fora:') === 0) {
+      const f = byFora(to.slice(5));
+      return { txt: 'Fora · ' + f.nomeCurto, cor: '#4C5563' };
+    }
+    const b = byBin(to);
+    return { txt: 'Lixeira ' + b.curto.toLowerCase(), cor: b.cor };
+  }
+
+  /* ---------------- Render: abas ---------------- */
   const tabsEl = document.getElementById('tabs');
   const panelsEl = document.getElementById('panels');
 
-  tabsEl.innerHTML = CATS.map((c, i) => (
-    '<button class="tab" type="button" role="tab" id="tab-' + c.id + '" aria-controls="p-' + c.id + '"' +
+  tabsEl.innerHTML = BINS.map((b, i) => (
+    '<button class="tab" type="button" role="tab" id="tab-' + b.id + '" aria-controls="p-' + b.id + '"' +
     ' aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '"' +
-    ' style="--c:' + c.cor + ';--fg:' + c.fg + '">' +
-    '<i data-lucide="' + c.icone + '" aria-hidden="true"></i>' + esc(c.nome) + '</button>'
+    ' style="--c:' + b.cor + ';--fg:' + b.fg + '">' +
+    '<span class="dot" aria-hidden="true"></span>' +
+    '<span><b>' + esc(b.curto) + '</b><small>' + esc(b.sub) + '</small></span></button>'
   )).join('');
 
+  /* ---------------- Render: painéis ---------------- */
   const row = (t, ok) => '<li><span class="mk" aria-hidden="true">' + (ok ? '✓' : '✕') + '</span><span>' + esc(t) + '</span></li>';
 
-  panelsEl.innerHTML = CATS.map((c, i) => (
-    '<section class="panel" id="p-' + c.id + '" role="tabpanel" aria-labelledby="tab-' + c.id + '" tabindex="0"' +
-    ' style="--c:' + c.cor + ';--t:' + c.tinta + ';--fg:' + c.fg + '"' + (i ? ' hidden' : '') + '>' +
+  function renderPanel(b, i) {
+    const isAzul = b.id === 'azul';
+    const naoCard =
+      '<div class="card nao' + (isAzul ? ' nao-wide' : '') + '">' +
+        '<h3>' + (isAzul ? '<i data-lucide="x-circle" aria-hidden="true"></i>' : '<span class="mk" aria-hidden="true">✕</span>') + 'Não pode</h3>' +
+        '<ul>' + b.nao.map((t) => row(t, 0)).join('') + '</ul>' +
+        '<p class="card-link"><a href="#fora">Ver o que fica fora das duas lixeiras' +
+          '<i data-lucide="arrow-right" aria-hidden="true"></i></a></p>' +
+      '</div>';
+
+    const body = isAzul
+      ? '<div class="mats">' + b.grupos.map((g) => (
+          '<div class="card mat"><h3><i data-lucide="' + g.icone + '" aria-hidden="true"></i>' + esc(g.nome) + '</h3>' +
+          '<ul>' + g.itens.map((t) => row(t, 1)).join('') + '</ul></div>'
+        )).join('') + '</div>' + naoCard
+      : '<div class="cols">' +
+          '<div class="card pode"><h3><span class="mk" aria-hidden="true">✓</span>Pode</h3>' +
+          '<ul>' + b.pode.map((t) => row(t, 1)).join('') + '</ul></div>' +
+          naoCard +
+        '</div>';
+
+    return '<section class="panel" id="p-' + b.id + '" role="tabpanel" aria-labelledby="tab-' + b.id + '" tabindex="0"' +
+      ' style="--c:' + b.cor + ';--t:' + b.tinta + ';--fg:' + b.fg + '"' + (i ? ' hidden' : '') + '>' +
 
       '<div class="hero">' +
         '<div>' +
-          '<p class="kicker">Lixeira ' + c.lixeira + ' · padrão CONAMA</p>' +
-          '<h2>' + esc(c.nome) + '</h2>' +
-          '<p>' + esc(c.resumo) + '</p>' +
+          '<p class="kicker">Lixeira ' + b.lixeira + ' · ' + esc(b.curto) + '</p>' +
+          '<h2>' + esc(b.nome) + '</h2>' +
+          '<p>' + esc(b.resumo) + '</p>' +
         '</div>' +
-        '<div class="art" aria-hidden="true"><i data-lucide="' + c.icone + '"></i></div>' +
+        '<div class="art" aria-hidden="true"><i data-lucide="' + b.icone + '"></i></div>' +
       '</div>' +
 
-      '<div class="cols">' +
-        '<div class="card pode">' +
-          '<h3><span class="mk" aria-hidden="true">✓</span>Pode</h3>' +
-          '<ul>' + c.pode.map((t) => row(t, 1)).join('') + '</ul>' +
-        '</div>' +
-        '<div class="card nao">' +
-          '<h3><span class="mk" aria-hidden="true">✕</span>Não pode</h3>' +
-          '<ul>' + c.nao.map((t) => row(t, 0)).join('') + '</ul>' +
-        '</div>' +
-      '</div>' +
+      '<div class="alert"><i data-lucide="shield-alert" aria-hidden="true"></i>' +
+        '<p><strong>Regra de preparo.</strong> ' + esc(b.alerta) + '</p></div>' +
+
+      body +
 
       '<div class="tip"><i data-lucide="lightbulb" aria-hidden="true"></i>' +
-        '<p><strong>Preparo rápido.</strong> ' + esc(c.dica) + '</p></div>' +
+        '<p><strong>Preparo rápido.</strong> ' + esc(b.dica) + '</p></div>' +
 
       '<div class="story">' +
         '<h3>Para onde vai o seu resíduo?</h3>' +
-        '<p class="sub">' + esc(c.jornada) + '</p>' +
-        '<ol class="steps">' + c.passos.map((p) => '<li><b>' + esc(p.t) + '</b><span>' + esc(p.d) + '</span></li>').join('') + '</ol>' +
+        '<p class="sub">' + esc(b.jornada) + '</p>' +
+        '<ol class="steps">' + b.passos.map((p) => '<li><b>' + esc(p.t) + '</b><span>' + esc(p.d) + '</span></li>').join('') + '</ol>' +
         '<div class="partner">' +
           '<div><span class="p-t">Iniciativa no Rio</span>' +
-            '<strong>' + esc(c.parceiro.nome) + '</strong>' +
-            '<p>' + esc(c.parceiro.txt) + '</p></div>' +
-          '<a class="btn" href="' + c.parceiro.url + '" target="_blank" rel="noopener noreferrer">' +
-            esc(c.parceiro.cta) + '<i data-lucide="external-link" aria-hidden="true"></i></a>' +
+            '<strong>' + esc(b.parceiro.nome) + '</strong>' +
+            '<p>' + esc(b.parceiro.txt) + '</p></div>' +
+          '<a class="btn" href="' + b.parceiro.url + '" target="_blank" rel="noopener noreferrer">' +
+            esc(b.parceiro.cta) + '<i data-lucide="external-link" aria-hidden="true"></i></a>' +
         '</div>' +
-        (c.extra.length
-          ? '<div class="plinks">' + c.extra.map((l) =>
+        (b.extra.length
+          ? '<div class="plinks">' + b.extra.map((l) =>
               '<a href="' + l.url + '" target="_blank" rel="noopener noreferrer">' + esc(l.nome) + '</a>').join('') + '</div>'
           : '') +
       '</div>' +
-    '</section>'
+    '</section>';
+  }
+
+  panelsEl.innerHTML = BINS.map(renderPanel).join('');
+
+  /* ---------------- Render: fora das lixeiras ---------------- */
+  document.getElementById('fora-grid').innerHTML = FORA.map((f) => (
+    '<article class="fora-card" id="fora-' + f.id + '" tabindex="-1">' +
+      '<div class="fc-ic"><i data-lucide="' + f.icone + '" aria-hidden="true"></i></div>' +
+      '<span class="dest">' + esc(f.onde) + '</span>' +
+      '<h3>' + esc(f.nome) + '</h3>' +
+      '<p>' + esc(f.txt) + '</p>' +
+      '<a href="' + f.url + '" target="_blank" rel="noopener noreferrer">' + esc(f.cta) +
+        '<i data-lucide="external-link" aria-hidden="true"></i></a>' +
+    '</article>'
   )).join('');
 
   if (window.lucide) window.lucide.createIcons();
 
-  /* ---------- Abas ---------- */
-  let current = CATS[0].id;
+  /* ---------------- Abas ---------------- */
+  let current = BINS[0].id;
 
   function activate(id, opts) {
-    if (!byId(id)) return;
+    if (!byBin(id)) return;
     opts = opts || {};
     current = id;
     Array.prototype.forEach.call(document.querySelectorAll('.tab'), (t) => {
@@ -768,31 +778,35 @@
     Array.prototype.forEach.call(document.querySelectorAll('.panel'), (p) => {
       p.hidden = p.id !== 'p-' + id;
     });
-    const tab = document.getElementById('tab-' + id);
-    if (tab) tab.scrollIntoView({ block: 'nearest', inline: 'center', behavior: opts.instant ? 'auto' : 'smooth' });
-    if (opts.focus && tab) tab.focus({ preventScroll: true });
+    if (opts.focus) {
+      const tab = document.getElementById('tab-' + id);
+      if (tab) tab.focus({ preventScroll: true });
+    }
+    if (opts.scrollToPanel) {
+      const panel = document.getElementById('p-' + id);
+      if (panel) panel.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
     try { history.replaceState(null, '', '#' + id); } catch (e) { /* file:// em alguns navegadores */ }
   }
 
   tabsEl.addEventListener('click', (e) => {
     const b = e.target.closest('.tab');
-    if (b) activate(b.id.slice(4));
+    if (b) activate(b.id.slice(4), { scrollToPanel: window.scrollY > 260 });
   });
 
   tabsEl.addEventListener('keydown', (e) => {
-    const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
-    if (keys.indexOf(e.key) === -1) return;
+    if (['ArrowRight', 'ArrowLeft', 'Home', 'End'].indexOf(e.key) === -1) return;
     e.preventDefault();
-    const i = CATS.map((c) => c.id).indexOf(current);
+    const i = BINS.map((b) => b.id).indexOf(current);
     let n = i;
-    if (e.key === 'ArrowRight') n = (i + 1) % CATS.length;
-    if (e.key === 'ArrowLeft') n = (i - 1 + CATS.length) % CATS.length;
+    if (e.key === 'ArrowRight') n = (i + 1) % BINS.length;
+    if (e.key === 'ArrowLeft') n = (i - 1 + BINS.length) % BINS.length;
     if (e.key === 'Home') n = 0;
-    if (e.key === 'End') n = CATS.length - 1;
-    activate(CATS[n].id, { focus: true });
+    if (e.key === 'End') n = BINS.length - 1;
+    activate(BINS[n].id, { focus: true });
   });
 
-  /* ---------- Busca ---------- */
+  /* ---------------- Busca ---------------- */
   const input = document.getElementById('q');
   const results = document.getElementById('results');
   const clearBtn = document.getElementById('clear');
@@ -822,7 +836,7 @@
       else if (t.indexOf(n) === 0) s = 78;
       else if (n.length >= 3 && t.split(' ').indexOf(n) !== -1) s = 66;
       else if (t.indexOf(n) !== -1) s = 58;
-      return { t: e.t, id: e.id, nota: e.nota, score: s, len: t.length };
+      return { t: e.t, to: e.to, nota: e.nota, score: s, len: t.length };
     }).filter((e) => e.score > 0)
       .sort((a, b) => (b.score - a.score) || (a.len - b.len))
       .slice(0, 6);
@@ -831,15 +845,15 @@
       results.innerHTML =
         '<button class="res" type="button" role="option" data-fallback="1" aria-selected="false">' +
           '<span class="res-t">Nada encontrado para “' + esc(q) + '”</span>' +
-          '<span class="res-n">Na dúvida, embale e procure o ponto de entrega mais próximo — e, se não for reciclável, vá de cinza.</span>' +
+          '<span class="res-n">Na dúvida, a lixeira cinza. Antes, veja se o item está limpo e seco: se estiver, pode ser azul.</span>' +
         '</button>';
     } else {
       results.innerHTML = hits.map((h, i) => {
-        const c = byId(h.id);
+        const d = destinoLabel(h.to);
         return '<button class="res" type="button" role="option" id="opt-' + i + '" data-i="' + i + '"' +
-          ' aria-selected="false" style="--c:' + c.cor + '">' +
+          ' aria-selected="false" style="--c:' + d.cor + '">' +
           '<span class="res-t">' + esc(h.t) + '</span>' +
-          '<span class="res-b">Lixeira ' + c.lixeira + ' · ' + esc(c.nome) + '</span>' +
+          '<span class="res-b">' + esc(d.txt) + '</span>' +
           (h.nota ? '<span class="res-n">' + esc(h.nota) + '</span>' : '') +
         '</button>';
       }).join('');
@@ -853,8 +867,8 @@
   }
 
   let flashTimer;
-  function flash(term) {
-    const panel = document.getElementById('p-' + current);
+  function flashItem(term, binId) {
+    const panel = document.getElementById('p-' + binId);
     if (!panel) return;
     const n = norm(term);
     const items = Array.prototype.slice.call(panel.querySelectorAll('.card li'));
@@ -866,6 +880,28 @@
     el.scrollIntoView({ block: 'center', behavior: 'smooth' });
     clearTimeout(flashTimer);
     flashTimer = setTimeout(() => el.classList.remove('flash'), 2400);
+  }
+
+  function flashFora(foraId) {
+    const card = document.getElementById('fora-' + foraId);
+    if (!card) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.fora-card.flash'), (x) => x.classList.remove('flash'));
+    card.classList.add('flash');
+    card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    card.focus({ preventScroll: true });
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => card.classList.remove('flash'), 2600);
+  }
+
+  function goTo(h) {
+    if (h.to.indexOf('fora:') === 0) {
+      flashFora(h.to.slice(5));
+      status.textContent = '“' + h.t + '” fica fora das duas lixeiras: veja o ponto de entrega.';
+    } else {
+      activate(h.to);
+      flashItem(h.t, h.to);
+      status.textContent = '“' + h.t + '” vai na lixeira ' + byBin(h.to).curto.toLowerCase() + '.';
+    }
   }
 
   input.addEventListener('input', renderResults);
@@ -903,13 +939,10 @@
     closeResults();
     if (b.dataset.i != null) {
       const h = hits[Number(b.dataset.i)];
-      if (!h) return;
-      activate(h.id);
-      flash(h.t);
-      status.textContent = '“' + h.t + '” vai na lixeira ' + byId(h.id).nome + '.';
+      if (h) goTo(h);
     } else {
-      activate('rejeito');
-      status.textContent = 'Aberto o guia de rejeitos.';
+      activate('cinza', { scrollToPanel: true });
+      status.textContent = 'Aberto o guia da lixeira cinza.';
     }
   });
 
@@ -932,9 +965,16 @@
     renderResults();
   });
 
-  /* ---------- Início ---------- */
+  /* ---------------- Início ---------------- */
   const hash = location.hash.slice(1);
-  activate(byId(hash) ? hash : CATS[0].id, { instant: true });
+  if (hash === 'fora' || byFora(hash)) {
+    activate(BINS[0].id, { instant: true });
+    if (hash !== 'fora') {
+      setTimeout(() => flashFora(hash), 60);
+    }
+  } else {
+    activate(byBin(hash) ? hash : BINS[0].id, { instant: true });
+  }
 })();
 </script>
 </body>
