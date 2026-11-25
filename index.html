@@ -691,7 +691,7 @@
     const isAzul = b.id === 'azul';
     const naoCard =
       '<div class="card nao' + (isAzul ? ' nao-wide' : '') + '">' +
-        '<h3>' + (isAzul ? '<i data-lucide="x-circle" aria-hidden="true"></i>' : '<span class="mk" aria-hidden="true">✕</span>') + 'Não pode</h3>' +
+        '<h3>' + (isAzul ? '<i data-lucide="ban" aria-hidden="true"></i>' : '<span class="mk" aria-hidden="true">✕</span>') + 'Não pode</h3>' +
         '<ul>' + b.nao.map((t) => row(t, 0)).join('') + '</ul>' +
         '<p class="card-link"><a href="#fora">Ver o que fica fora das duas lixeiras' +
           '<i data-lucide="arrow-right" aria-hidden="true"></i></a></p>' +
