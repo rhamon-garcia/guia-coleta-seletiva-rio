@@ -67,8 +67,8 @@
 
   .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
   .brand img{
-    height:40px;width:auto;display:block;background:#fff;
-    border:1px solid var(--line);border-radius:10px;padding:4px 8px;
+    height:56px;width:auto;display:block;background:#fff;
+    border:1px solid var(--line);border-radius:12px;padding:5px 10px;
   }
   .brand span{font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
@@ -78,6 +78,8 @@
     line-height:1.02;letter-spacing:-.035em;
   }
   h1 em{font-style:normal;color:var(--accent)}
+  h1 .c-azul{color:#0B4A8F}
+  h1 .c-cinza{color:#5A6472}
 
   .lede{max-width:60ch;margin:0 0 22px;color:var(--ink-2);font-size:clamp(1rem,1.6vw,1.1rem)}
 
@@ -387,7 +389,7 @@
   @media (max-width:560px){
     .wrap{padding:0 16px}
     .top{padding:20px 0 6px}
-    .brand img{height:34px}
+    .brand img{height:46px}
     .rule{padding:15px 16px;gap:11px}
     .rule strong{font-size:1.02rem}
     .hero{padding:20px 18px}
@@ -422,7 +424,7 @@
       <span>Coleta seletiva no campus</span>
     </div>
 
-    <h1>Azul ou <em>cinza</em>?</h1>
+    <h1><span class="c-azul">Azul</span> ou <span class="c-cinza">cinza</span>?</h1>
     <p class="lede">Duas lixeiras, uma decisão. Digite o item e o guia responde na hora — e mostra o que acontece com ele depois que sai da sua mão.</p>
 
     <div class="rule" role="note">
